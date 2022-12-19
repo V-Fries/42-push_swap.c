@@ -1,7 +1,12 @@
+# executables
+push_swap
+push_swap_debug
+
 # Prerequisites
 *.d
 
 # Object files
+build
 *.o
 *.ko
 *.obj

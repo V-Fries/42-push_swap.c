@@ -4,6 +4,7 @@ NAME_DEBUG =	push_swap_debug
 
 
 H_FILES =\
+			operations.h
 
 HEADERS =\
 			${addprefix includes/, ${H_FILES}}
@@ -16,13 +17,27 @@ INCLUDES =\
 SRCS_DIR = srcs/
 
 SRCS =\
+			operations/push.c			\
+			operations/reverse_rotate.c	\
+			operations/rotate.c			\
+			operations/swap.c
+
+
+TEST_DIR = test/
+
+SRCS_TEST =\
+				includes/operations.h.c
 
 
 DIR_OBJS = 		build/
 
+TEST_OBJS_DIR = ${DIR_OBJS}test/
+
 OBJS =			${addprefix ${DIR_OBJS},${SRCS:.c=.o}}
 
 OBJS_DEBUG =	${addprefix ${DIR_OBJS},${SRCS:.c=_debug.o}}
+
+OBJS_TEST =		${addprefix ${TEST_OBJS_DIR},${SRCS_TEST:.c=.o}}
 
 
 FLAGS_NO_O3 = 	-Wall -Wextra -Werror
@@ -100,8 +115,18 @@ re_debug:		fclean
 
 both:			all debug
 
+test:			${DIR_OBJS}
+				${MAKE_LIBFT}
+				${MAKE} compile_tests
+
+compile_tests:	${OBJS_TEST}
+				@echo "Test compiled"
+
+${TEST_OBJS_DIR}%.o: ${TEST_DIR}%.c ${SHARED_DEPENDENCIES} ${DEFAULT_DEPENDENCIES}
+				${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
+
 ${DIR_OBJS}: Makefile
-				@echo ${OBJS} | tr ' ' '\n'\
+				@echo ${OBJS} ${OBJS_TEST} | tr ' ' '\n'\
 					| sed 's|\(.*\)/.*|\1|'\
 					| sed 's/^/${MKDIR} /'\
 					| sh -s
@@ -110,4 +135,4 @@ ${DIR_OBJS}: Makefile
 					@# Adds mkdir -p at start of each lines
 					@# Executes the script (Creates all folders)
 
-.PHONY:			all debug clean fclean re re_debug both
+.PHONY:			all debug clean fclean re re_debug both test compile_tests
