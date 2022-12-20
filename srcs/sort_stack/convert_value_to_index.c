@@ -6,11 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:10:13 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 11:10:15 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 11:43:17 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_linked_list.h"
+#include <stddef.h>
 
 static int	get_index(t_list_i *stack, int target)
 {
