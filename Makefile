@@ -22,7 +22,8 @@ SRCS =\
 			operations/reverse_rotate.c	\
 			operations/rotate.c			\
 			operations/swap.c			\
-			convert_value_to_index.c
+			convert_value_to_index.c	\
+			main.c
 
 
 TEST_DIR = test/
