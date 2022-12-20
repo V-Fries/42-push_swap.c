@@ -4,7 +4,8 @@ NAME_DEBUG =	push_swap_debug
 
 
 H_FILES =\
-			operations.h
+			operations.h	\
+			sort.h
 
 HEADERS =\
 			${addprefix includes/, ${H_FILES}}
@@ -20,13 +21,15 @@ SRCS =\
 			operations/push.c			\
 			operations/reverse_rotate.c	\
 			operations/rotate.c			\
-			operations/swap.c
+			operations/swap.c			\
+			convert_value_to_index.c
 
 
 TEST_DIR = test/
 
 SRCS_TEST =\
-				includes/operations.h.c
+				includes/operations.h.c	\
+				includes/sort.h.c
 
 
 DIR_OBJS = 		build/
