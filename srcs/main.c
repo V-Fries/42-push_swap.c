@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 19:27:00 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 11:22:00 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 12:42:07 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ int	main(void)
 	order.start = SORT_ORDER;
 	order.current = SORT_ORDER;
 	sort_stack(&a, order);
+	if (is_sorted(a, SORT_ORDER))
+		ft_putstr("OK\n");
+	else
+		ft_putstr("KO\n");
 	ft_lsti_clear(&a);
 	return (0);
 }
