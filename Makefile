@@ -22,7 +22,9 @@ SRCS =\
 			operations/reverse_rotate.c	\
 			operations/rotate.c			\
 			operations/swap.c			\
-			convert_value_to_index.c	\
+			sort_stack/convert_value_to_index.c	\
+			sort_stack/is_sorted.c				\
+			sort_stack/sort_stack.c				\
 			main.c
 
 

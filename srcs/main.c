@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 19:27:00 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 11:16:12 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 11:22:00 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 #define LIST_SIZE 100
 #define MAX_VALUE LIST_SIZE
+
+#define SORT_ORDER ASCENDING
 
 t_list_i	*get_new_elem(t_list_i *lst)
 {
@@ -54,13 +56,16 @@ t_list_i	*generate_random_list(void)
 int	main(void)
 {
 	t_list_i	*a;
+	t_orders	order;
 
 	srand(time(NULL));
 	a = generate_random_list();
 	if (a == NULL)
 		return (ft_putstr("ERROR, malloc failed\n"), 1);
 	a = convert_value_to_index(a);
-	// Sort_stack
+	order.start = SORT_ORDER;
+	order.current = SORT_ORDER;
+	sort_stack(&a, order);
 	ft_lsti_clear(&a);
 	return (0);
 }
