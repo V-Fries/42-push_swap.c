@@ -4,7 +4,9 @@ NAME_DEBUG =	push_swap_debug
 
 
 H_FILES =\
+			error.h			\
 			operations.h	\
+			parsing.h		\
 			sort.h
 
 HEADERS =\
@@ -22,6 +24,7 @@ SRCS =\
 			operations/reverse_rotate.c	\
 			operations/rotate.c			\
 			operations/swap.c			\
+\
 			sort_stack/convert_value_to_index.c	\
 			sort_stack/divide_stack.c			\
 			sort_stack/is_sorted.c				\
@@ -29,13 +32,18 @@ SRCS =\
 			sort_stack/reverse_order.c			\
 			sort_stack/should_be_pushed.c		\
 			sort_stack/sort_stack.c				\
-			main.c
+\
+			error.c	\
+			main.c	\
+			parsing.c
 
 
 TEST_DIR = test/
 
 SRCS_TEST =\
+				includes/error.h.c		\
 				includes/operations.h.c	\
+				includes/parsing.h.c	\
 				includes/sort.h.c
 
 

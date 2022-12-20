@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:10:54 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 12:31:17 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 14:15:37 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ bool		elems_left_to_push(t_list_i *stack, int size, int median,
 				t_order order);
 
 // sort_stack.c
-void		sort_stack(t_list_i **a, t_orders order);
+void		sort_stack(t_list_i **a, t_order order);
 
 #endif

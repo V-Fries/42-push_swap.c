@@ -12,6 +12,9 @@ build
 *.obj
 *.elf
 
+# IDE
+.vscode
+
 # Linker output
 *.ilk
 *.map

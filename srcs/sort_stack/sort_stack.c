@@ -6,12 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 12:40:36 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/20 15:06:16 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
 #include "operations.h"
+#include "error.h"
 #include <stddef.h>
 
 static void	sort_last_elems(t_list_i **stack, t_orders orders, int size)
@@ -64,16 +65,24 @@ static void	recursive_sort(t_list_i **stack, t_orders orders)
 	push_back_sorted_elems(stack, &new_stack, orders);
 }
 
-void	sort_stack(t_list_i **a, t_orders orders)
+// TODO Don't write operations as they are done, put them in a t_list so that
+// TODO the push_a and push_b can be parsed and minimized
+void	sort_stack(t_list_i **a, t_order order)
 {
 	t_list_i	*b;
+	t_orders	orders;
 
-	if (is_sorted(*a, orders.current))
+	*a = convert_value_to_index(*a);
+	if (*a == NULL)
+		error();
+	if (is_sorted(*a, order))
 		return ;
-	b = divide_a(a, orders.current);
-	if (is_sorted(*a, orders.current) == false)
+	b = divide_a(a, order);
+	orders.current = order;
+	orders.start = order;
+	if (is_sorted(*a, order) == false)
 		recursive_sort(a, orders);
-	if (is_sorted(b, reverse_order(orders.current)) == false)
+	if (is_sorted(b, reverse_order(order)) == false)
 		recursive_sort(&b, reverse_orders(orders));
 	while (b)
 		push_a(a, &b);
