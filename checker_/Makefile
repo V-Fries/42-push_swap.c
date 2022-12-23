@@ -1,38 +1,31 @@
-NAME =			push_swap
+NAME =			checker
 
-NAME_DEBUG =	push_swap_debug
+NAME_DEBUG =	${NAME}_debug
 
 
 H_FILES =\
-			sort.h
+
 
 HEADERS =\
 			${addprefix includes/, ${H_FILES}}
 
 INCLUDES =\
-			-I ${LIB_PUSH_SWAP_PATH}includes/				\
-			-I ${LIB_PUSH_SWAP_PATH}libs/libft/includes/	\
+			-I ${LIB_PUSH_SWAP_PATH}includes/			\
+			-I ${LIB_PUSH_SWAP_PATH}libs/libft/includes	\
 			-I includes
 
 
 SRCS_DIR = srcs/
 
 SRCS =\
-			sort_stack/convert_value_to_index.c	\
-			sort_stack/divide_stack.c			\
-			sort_stack/is_sorted.c				\
-			sort_stack/operate_on_stack.c		\
-			sort_stack/reverse_order.c			\
-			sort_stack/should_be_pushed.c		\
-			sort_stack/sort_stack.c				\
-\
-			main.c
+		display_stack.c
+
 
 
 TEST_DIR = test/
 
 SRCS_TEST =\
-				includes/sort.h.c
+
 
 
 DIR_OBJS = 		build/
@@ -71,20 +64,20 @@ DEFAULT_DEPENDENCIES =	${LIB_PUSH_SWAP_A}
 DEBUG_DEPENDENCIES = 	${LIB_PUSH_SWAP_A_DEBUG}
 
 
-DEBUG_L =	${LIB_PUSH_SWAP_L_DEBUG}
+DEBUG_L = ${LIB_PUSH_SWAP_L_DEBUG}
 
-DEFAULT_L =	${LIB_PUSH_SWAP_L}
+DEFAULT_L = ${LIB_PUSH_SWAP_L}
 
 
-RMF =	 				rm -f
+RMF =	 		rm -f
 
-MKDIR = 				mkdir -p
+MKDIR = 		mkdir -p
 
-MAKE_LIB_PUSH_SWAP =	${MAKE} -C ${LIB_PUSH_SWAP_PATH}
+MAKE_LIBFT =	${MAKE} -C ${LIB_PUSH_SWAP_PATH}
 
 
 all:			${DIR_OBJS}
-				${MAKE_LIB_PUSH_SWAP}
+				${MAKE_LIBFT}
 				@${MAKE} ${NAME}
 
 $(NAME):		${OBJS}
@@ -95,7 +88,7 @@ ${DIR_OBJS}%.o: ${SRCS_DIR}%.c ${SHARED_DEPENDENCIES} ${DEFAULT_DEPENDENCIES}
 				${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
 
 debug:			${DIR_OBJS}
-				${MAKE_LIB_PUSH_SWAP} debug
+				${MAKE_LIBFT} debug
 				${MAKE} ${NAME_DEBUG}
 
 ${NAME_DEBUG}:	${OBJS_DEBUG}
@@ -106,11 +99,11 @@ ${DIR_OBJS}%_debug.o: ${SRCS_DIR}%.c ${SHARED_DEPENDENCIES} ${DEBUG_DEPENDENCIES
 					cc ${FLAGS_DEBUG} ${INCLUDES} -c $< -o $@
 
 clean:
-				${MAKE_LIB_PUSH_SWAP} clean
+				${MAKE_LIBFT} clean
 				${RMF} ${OBJS} ${OBJS_DEBUG} ${OBJS_TEST}
 
 fclean:			clean
-				${MAKE_LIB_PUSH_SWAP} fclean
+				${MAKE_LIBFT} fclean
 				${RMF} ${NAME} ${NAME_DEBUG}
 
 re:				fclean
@@ -122,7 +115,7 @@ re_debug:		fclean
 both:			all debug
 
 test:			${DIR_OBJS}
-				${MAKE_LIB_PUSH_SWAP}
+				${MAKE_LIBFT}
 				${MAKE} compile_tests
 
 compile_tests:	${OBJS_TEST}

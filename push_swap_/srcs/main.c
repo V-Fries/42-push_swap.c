@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 19:27:00 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 16:55:17 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/23 15:43:04 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	// TODO Use args when testing is done
-	a = parse_arguments(argv + 1, argc - 1);
-	//a = generate_random_list();
+	//a = parse_arguments(argv + 1, argc - 1);
+	a = generate_random_list();
 	// ! TODO
 	if (a == NULL)
 		error();

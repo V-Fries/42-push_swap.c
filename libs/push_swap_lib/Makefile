@@ -1,38 +1,39 @@
-NAME =			push_swap
+NAME =			lib_push_swap.a
 
-NAME_DEBUG =	push_swap_debug
+NAME_DEBUG =	lib_push_swap_debug.a
 
 
 H_FILES =\
-			sort.h
+			error.h			\
+			operations.h	\
+			parsing.h
 
 HEADERS =\
 			${addprefix includes/, ${H_FILES}}
 
 INCLUDES =\
-			-I ${LIB_PUSH_SWAP_PATH}includes/				\
-			-I ${LIB_PUSH_SWAP_PATH}libs/libft/includes/	\
+			-I ${LIBFT_PATH}includes/	\
 			-I includes
 
 
 SRCS_DIR = srcs/
 
 SRCS =\
-			sort_stack/convert_value_to_index.c	\
-			sort_stack/divide_stack.c			\
-			sort_stack/is_sorted.c				\
-			sort_stack/operate_on_stack.c		\
-			sort_stack/reverse_order.c			\
-			sort_stack/should_be_pushed.c		\
-			sort_stack/sort_stack.c				\
+				operations/push.c			\
+				operations/reverse_rotate.c	\
+				operations/rotate.c			\
+				operations/swap.c			\
 \
-			main.c
+				error.c		\
+				parsing.c
 
 
 TEST_DIR = test/
 
 SRCS_TEST =\
-				includes/sort.h.c
+				includes/error.h.c		\
+				includes/operations.h.c	\
+				includes/parsing.h.c
 
 
 DIR_OBJS = 		build/
@@ -53,64 +54,65 @@ FLAGS =			${FLAGS_NO_O3} -O3
 FLAGS_DEBUG	=	${FLAGS_NO_O3} -g3 -fsanitize=address
 
 
-LIB_PUSH_SWAP_L =		-L${LIB_PUSH_SWAP_PATH} -l_push_swap
+LIBFT_L =		-L${LIBFT_PATH} -lft
 
-LIB_PUSH_SWAP_L_DEBUG =	-L${LIB_PUSH_SWAP_PATH} -l_push_swap_debug
+LIBFT_L_DEBUG =	-L${LIBFT_PATH} -lft_debug
 
-LIB_PUSH_SWAP_A =		${LIB_PUSH_SWAP_PATH}lib_push_swap.a
+LIBFT_A =		${LIBFT_PATH}libft.a
 
-LIB_PUSH_SWAP_A_DEBUG =	${LIB_PUSH_SWAP_PATH}lib_push_swap_debug.a
+LIBFT_A_DEBUG =	${LIBFT_PATH}libft_debug.a
 
-LIB_PUSH_SWAP_PATH =	../libs/push_swap_lib/
+LIBFT_PATH =	libs/libft/
+
 
 
 SHARED_DEPENDENCIES =	Makefile ${HEADERS}
 
-DEFAULT_DEPENDENCIES =	${LIB_PUSH_SWAP_A}
+DEFAULT_DEPENDENCIES =	${LIBFT_A}
 
-DEBUG_DEPENDENCIES = 	${LIB_PUSH_SWAP_A_DEBUG}
+DEBUG_DEPENDENCIES = 	${LIBFT_A_DEBUG}
 
 
-DEBUG_L =	${LIB_PUSH_SWAP_L_DEBUG}
+DEBUG_L = ${LIBFT_L_DEBUG}
 
-DEFAULT_L =	${LIB_PUSH_SWAP_L}
+DEFAULT_L = ${LIBFT_L}
 
 
 RMF =	 				rm -f
 
 MKDIR = 				mkdir -p
 
-MAKE_LIB_PUSH_SWAP =	${MAKE} -C ${LIB_PUSH_SWAP_PATH}
+MAKE_LIBFT =			${MAKE} -C ${LIBFT_PATH}
 
 
 all:			${DIR_OBJS}
-				${MAKE_LIB_PUSH_SWAP}
+				${MAKE_LIBFT}
 				@${MAKE} ${NAME}
 
 $(NAME):		${OBJS}
-				${CC} ${FLAGS} ${INCLUDES}	\
-					${DEFAULT_L} ${OBJS} -o ${NAME}
+				cp ${LIBFT_A} ${NAME}
+				ar rcs ${NAME} ${OBJS}
 
 ${DIR_OBJS}%.o: ${SRCS_DIR}%.c ${SHARED_DEPENDENCIES} ${DEFAULT_DEPENDENCIES}
 				${CC} ${FLAGS} ${INCLUDES} -c $< -o $@
 
 debug:			${DIR_OBJS}
-				${MAKE_LIB_PUSH_SWAP} debug
+				${MAKE_LIBFT} debug
 				${MAKE} ${NAME_DEBUG}
 
 ${NAME_DEBUG}:	${OBJS_DEBUG}
-				${CC} ${FLAGS_DEBUG} ${INCLUDES}	\
-					${DEBUG_L} ${OBJS_DEBUG} -o ${NAME_DEBUG}
+				cp ${LIBFT_A_DEBUG} ${NAME_DEBUG}
+				ar rcs ${NAME_DEBUG} ${OBJS_DEBUG}
 
 ${DIR_OBJS}%_debug.o: ${SRCS_DIR}%.c ${SHARED_DEPENDENCIES} ${DEBUG_DEPENDENCIES}
 					cc ${FLAGS_DEBUG} ${INCLUDES} -c $< -o $@
 
 clean:
-				${MAKE_LIB_PUSH_SWAP} clean
+				${MAKE_LIBFT} clean
 				${RMF} ${OBJS} ${OBJS_DEBUG} ${OBJS_TEST}
 
 fclean:			clean
-				${MAKE_LIB_PUSH_SWAP} fclean
+				${MAKE_LIBFT} fclean
 				${RMF} ${NAME} ${NAME_DEBUG}
 
 re:				fclean
@@ -122,7 +124,7 @@ re_debug:		fclean
 both:			all debug
 
 test:			${DIR_OBJS}
-				${MAKE_LIB_PUSH_SWAP}
+				${MAKE_LIBFT}
 				${MAKE} compile_tests
 
 compile_tests:	${OBJS_TEST}
