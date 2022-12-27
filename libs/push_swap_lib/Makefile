@@ -4,9 +4,7 @@ NAME_DEBUG =	lib_push_swap_debug.a
 
 
 H_FILES =\
-			error.h			\
-			operations.h	\
-			parsing.h
+			push_swap_lib.h
 
 HEADERS =\
 			${addprefix includes/, ${H_FILES}}
@@ -25,15 +23,14 @@ SRCS =\
 				operations/swap.c			\
 \
 				error.c		\
+				is_sorted.c	\
 				parsing.c
 
 
 TEST_DIR = test/
 
 SRCS_TEST =\
-				includes/error.h.c		\
-				includes/operations.h.c	\
-				includes/parsing.h.c
+				includes/push_swap_lib.h.c
 
 
 DIR_OBJS = 		build/

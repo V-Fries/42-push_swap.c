@@ -6,11 +6,11 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:28:00 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 11:29:40 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 12:18:39 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sort.h"
+#include "push_swap_lib.h"
 #include <stdbool.h>
 #include <stddef.h>
 

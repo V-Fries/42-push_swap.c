@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:10:54 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 14:15:37 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 12:11:31 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,8 @@
 # define SORT_H
 
 # include "ft_linked_list.h"
+# include "push_swap_lib.h"
 # include <stdbool.h>
-
-typedef enum e_order
-{
-	ASCENDING = 0,
-	DESCENDING = 1,
-}	t_order;
-
-typedef struct s_orders
-{
-	t_order	current;
-	t_order	start;
-}	t_orders;
 
 // convert_value_to_index.c
 t_list_i	*convert_value_to_index(t_list_i *stack);
@@ -34,9 +23,6 @@ t_list_i	*convert_value_to_index(t_list_i *stack);
 // divide_stack.c
 t_list_i	*divide_stack(t_list_i **stack, int size, t_orders orders);
 t_list_i	*divide_a(t_list_i **a, t_order order);
-
-// is_sorted.c
-bool		is_sorted(t_list_i *stack, t_order order);
 
 // operate_on_stack.c
 void		push_elem(t_list_i **src, t_list_i **dst, t_orders orders);

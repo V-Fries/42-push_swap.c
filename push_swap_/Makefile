@@ -20,7 +20,6 @@ SRCS_DIR = srcs/
 SRCS =\
 			sort_stack/convert_value_to_index.c	\
 			sort_stack/divide_stack.c			\
-			sort_stack/is_sorted.c				\
 			sort_stack/operate_on_stack.c		\
 			sort_stack/reverse_order.c			\
 			sort_stack/should_be_pushed.c		\

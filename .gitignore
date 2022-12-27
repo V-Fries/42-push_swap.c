@@ -1,6 +1,11 @@
+# logs
+run.log
+
 # executables
 push_swap
 push_swap_debug
+checker
+checker_debug
 
 # Prerequisites
 *.d

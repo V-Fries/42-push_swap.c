@@ -6,12 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:30:18 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 12:33:13 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 12:17:37 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
-#include "operations.h"
+#include "push_swap_lib.h"
 
 void	push_elem(t_list_i **src, t_list_i **dst, t_orders orders)
 {

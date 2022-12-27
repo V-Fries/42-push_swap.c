@@ -6,13 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 15:06:16 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 12:17:49 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sort.h"
-#include "operations.h"
-#include "error.h"
+#include "push_swap_lib.h"
 #include <stddef.h>
 
 static void	sort_last_elems(t_list_i **stack, t_orders orders, int size)

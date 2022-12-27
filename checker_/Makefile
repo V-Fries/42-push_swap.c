@@ -4,6 +4,7 @@ NAME_DEBUG =	${NAME}_debug
 
 
 H_FILES =\
+		display_stack.h
 
 
 HEADERS =\
@@ -18,13 +19,15 @@ INCLUDES =\
 SRCS_DIR = srcs/
 
 SRCS =\
-		display_stack.c
+		display_stack.c	\
+		main.c
 
 
 
 TEST_DIR = test/
 
 SRCS_TEST =\
+			display_stack.h.c
 
 
 

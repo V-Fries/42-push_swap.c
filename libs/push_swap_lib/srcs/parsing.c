@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:00:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 17:05:52 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/27 12:09:34 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_char.h"
 #include "ft_numbers.h"
 #include "ft_string.h"
-#include "error.h"
+#include "push_swap_lib.h"
 #include <stdlib.h>
 #include <stdbool.h>
 
