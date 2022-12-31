@@ -6,12 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:48:42 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 16:08:44 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/31 16:29:20 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_linked_list.h"
-#include "ft_io.h"
+#include "push_swap_lib.h"
+#include "ft_string.h"
 #include <stddef.h>
 
 void	swap_one(t_list_i **stack)
@@ -26,21 +26,45 @@ void	swap_one(t_list_i **stack)
 	(*stack) = tmp;
 }
 
-void	swap_a(t_list_i **a)
+void	swap_a(t_list_i **a, t_list_i **operations)
 {
+	t_list_i	*operation;
+
 	swap_one(a);
-	ft_putstr("sa\n");
+	if (operations != NULL)
+	{
+		operation = ft_lsti_new(SA);
+		if (operation == NULL)
+			error();
+		ft_lsti_add_front(operations, operation);
+	}
 }
 
-void	swap_b(t_list_i **b)
+void	swap_b(t_list_i **b, t_list_i **operations)
 {
+	t_list_i	*operation;
+
 	swap_one(b);
-	ft_putstr("sb\n");
+	if (operations != NULL)
+	{
+		operation = ft_lsti_new(SB);
+		if (operation == NULL)
+			error();
+		ft_lsti_add_front(operations, operation);
+	}
 }
 
-void	swap_both(t_list_i **a, t_list_i **b)
+void	swap_both(t_list_i **a, t_list_i **b, t_list_i **operations)
 {
+	t_list_i	*operation;
+
 	swap_one(a);
 	swap_one(b);
-	ft_putstr("ss\n");
+	if (operations != NULL)
+	{
+		operation = ft_lsti_new(SS);
+		if (operation == NULL)
+			error();
+		ft_lsti_add_front(operations, operation);
+	}
 }

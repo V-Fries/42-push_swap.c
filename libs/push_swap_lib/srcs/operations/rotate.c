@@ -6,12 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:53:22 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 16:00:38 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/31 16:29:32 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_linked_list.h"
-#include "ft_io.h"
+#include "push_swap_lib.h"
+#include "ft_string.h"
 #include <stddef.h>
 
 void	rotate_one(t_list_i **stack)
@@ -28,21 +28,45 @@ void	rotate_one(t_list_i **stack)
 	tmp->next = NULL;
 }
 
-void	rotate_a(t_list_i **a)
+void	rotate_a(t_list_i **a, t_list_i **operations)
 {
+	t_list_i	*operation;
+
 	rotate_one(a);
-	ft_putstr("ra\n");
+	if (operations != NULL)
+	{
+		operation = ft_lsti_new(RA);
+		if (operation == NULL)
+			error();
+		ft_lsti_add_front(operations, operation);
+	}
 }
 
-void	rotate_b(t_list_i **b)
+void	rotate_b(t_list_i **b, t_list_i **operations)
 {
+	t_list_i	*operation;
+
 	rotate_one(b);
-	ft_putstr("rb\n");
+	if (operations != NULL)
+	{
+		operation = ft_lsti_new(RB);
+		if (operation == NULL)
+			error();
+		ft_lsti_add_front(operations, operation);
+	}
 }
 
-void	rotate_both(t_list_i **a, t_list_i **b)
+void	rotate_both(t_list_i **a, t_list_i **b, t_list_i **operations)
 {
+	t_list_i	*operation;
+
 	rotate_one(a);
 	rotate_one(b);
-	ft_putstr("rr\n");
+	if (operations != NULL)
+	{
+		operation = ft_lsti_new(RR);
+		if (operation == NULL)
+			error();
+		ft_lsti_add_front(operations, operation);
+	}
 }

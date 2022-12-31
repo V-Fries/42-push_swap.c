@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:57:47 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/27 14:14:58 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/31 17:01:04 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,27 +20,27 @@
 bool	operate_on_stack(t_list_i **a, t_list_i **b, char *input)
 {
 	if (ft_strcmp(input, "sa\n") == 0)
-		swap_a(a);
+		swap_a(a, NULL);
 	else if (ft_strcmp(input, "sb\n") == 0)
-		swap_b(b);
+		swap_b(b, NULL);
 	else if (ft_strcmp(input, "ss\n") == 0)
-		swap_both(a, b);
+		swap_both(a, b, NULL);
 	else if (ft_strcmp(input, "pa\n") == 0)
-		push_a(a, b);
+		push_a(a, b, NULL);
 	else if (ft_strcmp(input, "pb\n") == 0)
-		push_b(a, b);
+		push_b(a, b, NULL);
 	else if (ft_strcmp(input, "ra\n") == 0)
-		rotate_a(a);
+		rotate_a(a, NULL);
 	else if (ft_strcmp(input, "rb\n") == 0)
-		rotate_b(b);
+		rotate_b(b, NULL);
 	else if (ft_strcmp(input, "rr\n") == 0)
-		rotate_both(a, b);
+		rotate_both(a, b, NULL);
 	else if (ft_strcmp(input, "rra\n") == 0)
-		reverse_rotate_a(a);
+		reverse_rotate_a(a, NULL);
 	else if (ft_strcmp(input, "rrb\n") == 0)
-		reverse_rotate_b(b);
+		reverse_rotate_b(b, NULL);
 	else if (ft_strcmp(input, "rrr\n") == 0)
-		reverse_rotate_both(a, b);
+		reverse_rotate_both(a, b, NULL);
 	else
 		return (false);
 	return (true);

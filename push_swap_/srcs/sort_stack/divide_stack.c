@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:41:34 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 16:04:43 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/31 16:50:58 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static int	get_median(t_list_i *stack)
 	return (total / size);
 }
 
-t_list_i	*divide_stack(t_list_i **stack, t_orders orders)
+t_list_i	*divide_stack(t_list_i **stack, t_orders orders,
+				t_list_i **sorting_instructions)
 {
 	int			median;
 	int			nb_rotate;
@@ -49,17 +50,18 @@ t_list_i	*divide_stack(t_list_i **stack, t_orders orders)
 		while (should_be_pushed((*stack)->content, median, orders.current)
 			== false)
 		{
-			rotate_stack(stack, orders);
+			rotate_stack(stack, orders, sorting_instructions);
 			nb_rotate++;
 		}
-		push_elem(stack, &new_stack, orders);
+		push_elem(stack, &new_stack, orders, sorting_instructions);
 	}
 	while (nb_rotate-- > 0)
-		reverse_rotate_stack(stack, orders);
+		reverse_rotate_stack(stack, orders, sorting_instructions);
 	return (new_stack);
 }
 
-t_list_i	*divide_a(t_list_i **a, t_order order)
+t_list_i	*divide_a(t_list_i **a, t_order order,
+				t_list_i **sorting_instructions)
 {
 	int			median;
 	t_list_i	*b;
@@ -69,8 +71,8 @@ t_list_i	*divide_a(t_list_i **a, t_order order)
 	while (elems_left_to_push(*a, median, order))
 	{
 		while (should_be_pushed((*a)->content, median, order) == false)
-			rotate_a(a);
-		push_b(a, &b);
+			rotate_a(a, sorting_instructions);
+		push_b(a, &b, sorting_instructions);
 	}
 	return (b);
 }
