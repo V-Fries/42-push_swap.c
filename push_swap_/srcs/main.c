@@ -6,14 +6,14 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 19:27:00 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 16:59:42 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/31 23:38:54 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_linked_list.h"
+#include "push_swap_lib.h"
 #include "ft_io.h"
 #include "sort.h"
-#include "push_swap_lib.h"
+#include "optimize_sorting_instructions.h"
 #include <stddef.h>
 
 #ifndef SORT_ORDER
@@ -69,19 +69,7 @@ int	main(int argc, char **argv)
 	if (a == NULL)
 		error();
 	sorting_instructions = sort_stack(&a, SORT_ORDER);
-	// TODO Delete me
-	// for (t_list_i *cursor = a; cursor != NULL; cursor = cursor->next)
-	// {
-	// 	ft_putnbr_fd(cursor->content, STDOUT_FD);
-	// 	ft_putchar_fd('\n', STDOUT_FD);
-	// }
-	// (void)argv;
-	// if (is_sorted(a, SORT_ORDER))
-	// 	ft_putstr("OK\n");
-	// else
-	// 	ft_putstr("KO\n");
-	// ! TODO
-	// TODO optimize sorting_instructions
+	sorting_instructions = optimize_sorting_instructions(sorting_instructions);
 	print_instructions(sorting_instructions);
 	ft_lsti_clear(&a);
 	ft_lsti_clear(&sorting_instructions);

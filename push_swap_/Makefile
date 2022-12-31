@@ -4,6 +4,7 @@ NAME_DEBUG =	push_swap_debug
 
 
 H_FILES =\
+			optimize_sorting_instructions.h	\
 			sort.h
 
 HEADERS =\
@@ -18,6 +19,12 @@ INCLUDES =\
 SRCS_DIR = srcs/
 
 SRCS =\
+			optimize_sorting_instructions/add_instruction.c					\
+			optimize_sorting_instructions/optimize_sorting_instructions.c	\
+			optimize_sorting_instructions/push.c							\
+			optimize_sorting_instructions/rotate.c							\
+			optimize_sorting_instructions/swap.c							\
+\
 			sort_stack/convert_value_to_index.c	\
 			sort_stack/divide_stack.c			\
 			sort_stack/operate_on_stack.c		\
@@ -31,7 +38,8 @@ SRCS =\
 TEST_DIR = test/
 
 SRCS_TEST =\
-				includes/sort.h.c
+				includes/sort.h.c	\
+				includes/optimize_sorting_instructions.h.c
 
 
 DIR_OBJS = 		build/
