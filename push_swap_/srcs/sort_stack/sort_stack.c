@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/27 12:17:49 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/31 16:10:07 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,12 @@
 
 static void	sort_last_elems(t_list_i **stack, t_orders orders, int size)
 {
-	bool	swap;
-
 	if (size < 2)
 		return ;
-	swap = false;
-	if (orders.current == ASCENDING
-		&& (*stack)->content > (*stack)->next->content)
-		swap = true;
-	else if (orders.current == DESCENDING
-		&& (*stack)->content < (*stack)->next->content)
-		swap = true;
-	if (swap == true)
+	if ((orders.current == ASCENDING
+			&& (*stack)->content > (*stack)->next->content)
+		|| (orders.current == DESCENDING
+			&& (*stack)->content < (*stack)->next->content))
 	{
 		if (orders.current == orders.start)
 			swap_a(stack);
@@ -55,8 +49,7 @@ static void	recursive_sort(t_list_i **stack, t_orders orders)
 	size = ft_lsti_size(*stack);
 	if (size <= 2)
 		return (sort_last_elems(stack, orders, size));
-	new_stack = NULL;
-	new_stack = divide_stack(stack, size, orders);
+	new_stack = divide_stack(stack, orders);
 	if (is_sorted(*stack, orders.current) == false)
 		recursive_sort(stack, orders);
 	if (is_sorted(new_stack, reverse_order(orders.current)) == false)

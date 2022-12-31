@@ -71,6 +71,11 @@ run_debug:
 		./${NAME_DEBUG} ${RUN_INPUT} | ./${NAME_CHECKER_DEBUG} ${RUN_INPUT} > run.log
 		@cat run.log
 
+r_push_swap:
+		${MAKE} ${NAME}
+		./${NAME} ${RUN_INPUT} > run.log
+		@cat run.log
 
-.PHONY:	all clean fclean re test run run_debug ${NAME} ${NAME_DEBUG}	\
+
+.PHONY:	all clean fclean re test run run_debug r_push_swap ${NAME} ${NAME_DEBUG}	\
 		${NAME_CHECKER} ${NAME_CHECKER_DEBUG}

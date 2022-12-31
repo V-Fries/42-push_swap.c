@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:10:54 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/27 12:11:31 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/31 15:11:49 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 t_list_i	*convert_value_to_index(t_list_i *stack);
 
 // divide_stack.c
-t_list_i	*divide_stack(t_list_i **stack, int size, t_orders orders);
+t_list_i	*divide_stack(t_list_i **stack, t_orders orders);
 t_list_i	*divide_a(t_list_i **a, t_order order);
 
 // operate_on_stack.c
@@ -35,8 +35,7 @@ t_orders	reverse_orders(t_orders orders);
 
 // should_be_pushed.c
 bool		should_be_pushed(int value, int median, t_order order);
-bool		elems_left_to_push(t_list_i *stack, int size, int median,
-				t_order order);
+bool		elems_left_to_push(t_list_i *stack, int median, t_order order);
 
 // sort_stack.c
 void		sort_stack(t_list_i **a, t_order order);
