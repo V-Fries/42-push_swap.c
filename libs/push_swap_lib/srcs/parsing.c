@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:00:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/27 12:09:34 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2022/12/31 15:14:29 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*join_all_args(char **args, int size)
 	char	**args_null_terminated;
 	char	*ret;
 
-	args_null_terminated = malloc(sizeof(char *) * size + 1);
+	args_null_terminated = malloc(sizeof(char *) * (size + 1));
 	if (args_null_terminated == NULL)
 		return (NULL);
 	args_null_terminated[size] = NULL;
