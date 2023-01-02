@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/02 17:46:11 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 19:37:32 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ static void	sort_last_elems(t_list_i **stack, t_orders orders, int size,
 	}
 }
 
+static void	push_all_in_a(t_list_i **a, t_list_i *b,
+				t_list_i **sorting_instructions)
+{
+	while (b != NULL)
+		push_a(a, &b, sorting_instructions);
+}
+
 static void	recursive_sort(t_list_i **stack, t_orders orders,
 				t_list_i **sorting_instructions)
 {
@@ -48,8 +55,7 @@ static void	recursive_sort(t_list_i **stack, t_orders orders,
 		if (is_sorted(new_stack, reverse_order(orders.current)) == false)
 			recursive_sort(&new_stack, reverse_orders(orders),
 				sorting_instructions);
-		while (new_stack != NULL)
-			push_a(stack, &new_stack, sorting_instructions);
+		push_all_in_a(stack, new_stack, sorting_instructions);
 	}
 	else
 	{
@@ -58,6 +64,7 @@ static void	recursive_sort(t_list_i **stack, t_orders orders,
 				sorting_instructions);
 		if (is_sorted(*stack, orders.current) == false)
 			recursive_sort(stack, orders, sorting_instructions);
+		ft_lsti_clear(&new_stack);
 	}
 }
 
