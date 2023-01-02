@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/02 17:11:55 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 17:46:11 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,6 @@ static void	sort_last_elems(t_list_i **stack, t_orders orders, int size,
 	}
 }
 
-static void	push_back_sorted_elems(t_list_i	**stack, t_list_i **new_stack,
-				t_orders orders, t_list_i **sorting_instructions)
-{
-	if (orders.current == orders.start)
-		while (*new_stack != NULL)
-			push_a(stack, new_stack, sorting_instructions);
-	else
-		while (*new_stack != NULL)
-			push_b(new_stack, stack, sorting_instructions);
-}
-
 static void	recursive_sort(t_list_i **stack, t_orders orders,
 				t_list_i **sorting_instructions)
 {
@@ -59,7 +48,8 @@ static void	recursive_sort(t_list_i **stack, t_orders orders,
 		if (is_sorted(new_stack, reverse_order(orders.current)) == false)
 			recursive_sort(&new_stack, reverse_orders(orders),
 				sorting_instructions);
-		push_back_sorted_elems(stack, &new_stack, orders, sorting_instructions);
+		while (new_stack != NULL)
+			push_a(stack, &new_stack, sorting_instructions);
 	}
 	else
 	{
