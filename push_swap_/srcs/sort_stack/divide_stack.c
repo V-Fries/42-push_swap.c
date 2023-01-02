@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:41:34 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/02 01:04:43 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 19:13:11 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,31 +60,40 @@ t_list_i	*divide_stack(t_list_i **stack, t_orders orders,
 	return (new_stack);
 }
 
-static t_list_i	*divide_initial_stack(t_list_i **a, int limiter, t_order order,
-				t_list_i **sorting_instructions)
+static t_list_i	*divide_initial_stack_ascending(t_list_i **a,
+					t_list_i **new_stack_2, int limiter_low,
+					t_list_i **sorting_instructions)
 {
-	t_list_i	*new_stack;
+	t_list_i	*new_stack_1;
+	int			limiter_high;
 
-	new_stack = NULL;
-	while (elems_left_to_push(*a, limiter, order))
+	limiter_high = limiter_low * 2;
+	new_stack_1 = NULL;
+	while (elems_left_to_push(*a, limiter_high, ASCENDING))
 	{
-		while (should_be_pushed((*a)->content, limiter, order) == false)
+		if (should_be_pushed((*a)->content, limiter_low, ASCENDING))
+		{
+			push_b(a, &new_stack_1, sorting_instructions);
+			if (*new_stack_2 != NULL)
+				rotate_b(&new_stack_1, sorting_instructions);
+		}
+		else if (should_be_pushed((*a)->content, limiter_high, ASCENDING))
+		{
+			push_b(a, new_stack_2, sorting_instructions);
+		}
+		else
 			rotate_a(a, sorting_instructions);
-		push_b(a, &new_stack, sorting_instructions);
 	}
-	return (new_stack);
+	return (new_stack_1);
 }
 
 t_list_i	*get_semi_sorted_stack(t_list_i	**a, t_list_i	**new_stack_2,
 				t_order order, t_list_i	**sorting_instructions)
 {
-	t_list_i	*new_stack_1;
-	int			size_divided_by_three;
-
-	size_divided_by_three = ft_lsti_size(*a) / 3;
-	new_stack_1 = divide_initial_stack(a, size_divided_by_three,
-			order, sorting_instructions);
-	*new_stack_2 = divide_initial_stack(a, size_divided_by_three * 2,
-			order, sorting_instructions);
-	return (new_stack_1);
+	*new_stack_2 = NULL;
+	if (order == ASCENDING)
+		return (divide_initial_stack_ascending(a, new_stack_2,
+				ft_lsti_size(*a) / 3, sorting_instructions));
+	return (divide_initial_stack_ascending(a, new_stack_2, ft_lsti_size(*a) / 3,
+			sorting_instructions));
 }

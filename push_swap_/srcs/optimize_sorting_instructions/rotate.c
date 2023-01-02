@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 22:55:47 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 23:35:24 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 19:16:59 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,21 @@ static void	add_double_rotates(t_rotates *rotates,
 {
 	if (rotates->a > 0 && rotates->b > 0)
 	{
-		while (rotates->a-- > 0 && rotates->b-- > 0)
+		while (rotates->a > 0 && rotates->b > 0)
+		{
 			add_instruction(optimized_instructions, RR);
-		rotates->a++;
-		rotates->b++;
+			rotates->a--;
+			rotates->b--;
+		}
 	}
 	else if (rotates->a < 0 && rotates->b < 0)
 	{
-		while (rotates->a++ < 0 && rotates->b++ < 0)
+		while (rotates->a < 0 && rotates->b < 0)
+		{
 			add_instruction(optimized_instructions, RRR);
-		rotates->a--;
-		rotates->b--;
+			rotates->a++;
+			rotates->b++;
+		}
 	}
 }
 
