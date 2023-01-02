@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:57:47 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 17:01:04 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 07:08:33 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ bool	operate_on_stack(t_list_i **a, t_list_i **b, char *input)
 
 char	*get_input(t_list_i *a, t_list_i *b)
 {
+	char	*str;
+
 	ft_putchar_fd('\n', STDOUT_FD);
 	display_stack(a, "A");
 	display_stack(b, "B");
-	char *str = get_next_line(STDIN_FD);
+	str = get_next_line(STDIN_FD);
 	ft_printf("INPUT == %s\n", str);
 	return (str);
 }
@@ -84,22 +86,13 @@ bool	sort_stack(t_list_i **a, int *instruction_count)
 	input = get_input(*a, b);
 	if (handle_input(input, a, &b, instruction_count))
 		return (false);
-	while ((is_sorted(*a, ASCENDING) == false || b != NULL) && input != NULL)
+	while (input != NULL)
 	{
 		input = get_input(*a, b);
 		if (handle_input(input, a, &b, instruction_count))
 			return (false);
 	}
-	if (input != NULL)
-	{
-		ft_putchar_fd('\n', STDOUT_FD);
-		display_stack(*a, "A");
-		display_stack(b, "B");
-	}
-	if (is_sorted(*a, ASCENDING) == true && b == NULL)
-		ret = true;
-	else
-		ret = false;
+	ret = (is_sorted(*a, ASCENDING) == true && b == NULL);
 	ft_lsti_clear(a);
 	ft_lsti_clear(&b);
 	return (ret);
