@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 19:27:00 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 23:38:54 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/01 23:46:59 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SORT_ORDER ASCENDING
 #endif
 
-void	print_instruction(int instruction)
+static void	print_instruction(int instruction)
 {
 	if (instruction == SA)
 		ft_putstr("sa\n");
@@ -46,7 +46,7 @@ void	print_instruction(int instruction)
 		ft_putstr("rrr\n");
 }
 
-void	print_instructions(t_list_i *sorting_instructions)
+static void	print_instructions(t_list_i *sorting_instructions)
 {
 	while (sorting_instructions != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 17:02:03 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 01:04:14 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,25 @@ static void	recursive_sort(t_list_i **stack, t_orders orders,
 	push_back_sorted_elems(stack, &new_stack, orders, sorting_instructions);
 }
 
+void	sort_sub_stack(t_list_i **a, t_list_i **sub_stack, t_order order,
+			t_list_i **sorting_instructions)
+{
+	t_orders	orders;
+
+	orders.start = order;
+	orders.current = reverse_order(order);
+	if (is_sorted(*sub_stack, orders.current) == false)
+		recursive_sort(sub_stack, orders,
+			sorting_instructions);
+	while (*sub_stack != NULL)
+		push_a(a, sub_stack, sorting_instructions);
+}
+
 t_list_i	*sort_stack(t_list_i **a, t_order order)
 {
-	t_list_i	*b;
 	t_list_i	*sorting_instructions;
-	t_orders	orders;
+	t_list_i	*new_stack_1;
+	t_list_i	*new_stack_2;
 
 	*a = convert_value_to_index(*a);
 	if (*a == NULL)
@@ -72,15 +86,12 @@ t_list_i	*sort_stack(t_list_i **a, t_order order)
 	if (is_sorted(*a, order))
 		return (NULL);
 	sorting_instructions = NULL;
-	b = divide_a(a, order, &sorting_instructions);
-	orders.current = order;
-	orders.start = order;
+	new_stack_1 = get_semi_sorted_stack(a, &new_stack_2,
+			order, &sorting_instructions);
 	if (is_sorted(*a, order) == false)
-		recursive_sort(a, orders, &sorting_instructions);
-	if (is_sorted(b, reverse_order(order)) == false)
-		recursive_sort(&b, reverse_orders(orders), &sorting_instructions);
-	while (b)
-		push_a(a, &b, &sorting_instructions);
+		recursive_sort(a, get_orders(order), &sorting_instructions);
+	sort_sub_stack(a, &new_stack_2, order, &sorting_instructions);
+	sort_sub_stack(a, &new_stack_1, order, &sorting_instructions);
 	ft_lsti_reverse(&sorting_instructions);
 	return (sorting_instructions);
 }

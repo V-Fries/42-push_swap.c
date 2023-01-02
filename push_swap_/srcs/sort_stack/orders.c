@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:05:40 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/20 12:07:14 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/02 00:59:15 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,14 @@ t_orders	reverse_orders(t_orders orders)
 		orders.current = DESCENDING;
 	else
 		orders.current = ASCENDING;
+	return (orders);
+}
+
+t_orders	get_orders(t_order order)
+{
+	t_orders	orders;
+
+	orders.current = order;
+	orders.start = order;
 	return (orders);
 }
