@@ -1,7 +1,11 @@
+# junk
+.DS_Store
+
 # Test
 checker_Mac
 pswapviz.py
 complexity
+old
 
 # logs
 run.log
