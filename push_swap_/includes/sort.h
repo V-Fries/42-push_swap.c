@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:10:54 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/02 01:05:10 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/04 18:41:03 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_list_i	*convert_value_to_index(t_list_i *stack);
 // divide_stack.c
 t_list_i	*divide_stack(t_list_i **stack, t_orders orders,
 				t_list_i **sorting_instructions);
+t_list_i	*divide_stack_a(t_list_i **a, t_orders orders,
+				t_list_i **sorting_instructions);
 t_list_i	*get_semi_sorted_stack(t_list_i	**a, t_list_i	**new_stack_2,
 				t_order order, t_list_i	**sorting_instructions);
 
@@ -32,6 +34,8 @@ void		push_elem(t_list_i **src, t_list_i **dst, t_orders orders,
 void		rotate_stack(t_list_i **stack, t_orders orders,
 				t_list_i **sorting_instructions);
 void		reverse_rotate_stack(t_list_i **stack, t_orders orders,
+				t_list_i **sorting_instructions);
+void		push_all_in_a(t_list_i **a, t_list_i *b,
 				t_list_i **sorting_instructions);
 
 // orders.c

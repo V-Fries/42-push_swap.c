@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:41:34 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/02 20:24:21 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/04 18:35:09 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,24 @@ t_list_i	*divide_stack(t_list_i **stack, t_orders orders,
 	}
 	while (nb_rotate-- > 0)
 		reverse_rotate_stack(stack, orders, sorting_instructions);
+	return (new_stack);
+}
+
+t_list_i	*divide_stack_a(t_list_i **a, t_orders orders,
+				t_list_i **sorting_instructions)
+{
+	int			median;
+	t_list_i	*new_stack;
+
+	new_stack = NULL;
+	median = get_median(*a);
+	while (elems_left_to_push(*a, median, orders.current))
+	{
+		while (should_be_pushed((*a)->content, median, orders.current)
+			== false)
+			rotate_stack(a, orders, sorting_instructions);
+		push_elem(a, &new_stack, orders, sorting_instructions);
+	}
 	return (new_stack);
 }
 
