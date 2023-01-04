@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/04 18:40:37 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/04 19:37:19 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,23 @@ static void	recursive_sort(t_list_i **stack, t_orders orders,
 	t_list_i	*new_stack;
 
 	size = ft_lsti_size(*stack);
+	if (is_sorted(*stack, orders.current))
+		return ;
 	if (size <= 2)
 		return (sort_last_elems(stack, orders, size, sorting_instructions));
 	new_stack = divide_stack(stack, orders, sorting_instructions);
 	if (orders.current == orders.start)
 	{
-		if (is_sorted(*stack, orders.current) == false)
-			recursive_sort(stack, orders, sorting_instructions);
-		if (is_sorted(new_stack, reverse_order(orders.current)) == false)
-			recursive_sort(&new_stack, reverse_orders(orders),
-				sorting_instructions);
+		recursive_sort(stack, orders, sorting_instructions);
+		recursive_sort(&new_stack, reverse_orders(orders),
+			sorting_instructions);
 		push_all_in_a(stack, new_stack, sorting_instructions);
 	}
 	else
 	{
-		if (is_sorted(new_stack, reverse_order(orders.current)) == false)
-			recursive_sort(&new_stack, reverse_orders(orders),
-				sorting_instructions);
-		if (is_sorted(*stack, orders.current) == false)
-			recursive_sort(stack, orders, sorting_instructions);
+		recursive_sort(&new_stack, reverse_orders(orders),
+			sorting_instructions);
+		recursive_sort(stack, orders, sorting_instructions);
 		ft_lsti_clear(&new_stack);
 	}
 }
@@ -67,15 +65,15 @@ static void	recursive_sort_a(t_list_i **stack, t_orders orders,
 	int			size;
 	t_list_i	*new_stack;
 
+	if (is_sorted(*stack, orders.current))
+		return ;
 	size = ft_lsti_size(*stack);
 	if (size <= 2)
 		return (sort_last_elems(stack, orders, size, sorting_instructions));
 	new_stack = divide_stack_a(stack, orders, sorting_instructions);
-	if (is_sorted(*stack, orders.current) == false)
-		recursive_sort_a(stack, orders, sorting_instructions);
-	if (is_sorted(new_stack, reverse_order(orders.current)) == false)
-		recursive_sort(&new_stack, reverse_orders(orders),
-			sorting_instructions);
+	recursive_sort_a(stack, orders, sorting_instructions);
+	recursive_sort(&new_stack, reverse_orders(orders),
+		sorting_instructions);
 	push_all_in_a(stack, new_stack, sorting_instructions);
 }
 
@@ -86,8 +84,7 @@ void	sort_sub_stack(t_list_i **a, t_list_i **sub_stack, t_order order,
 
 	orders.start = order;
 	orders.current = reverse_order(order);
-	if (is_sorted(*sub_stack, orders.current) == false)
-		recursive_sort(sub_stack, orders, sorting_instructions);
+	recursive_sort(sub_stack, orders, sorting_instructions);
 	while (*sub_stack != NULL)
 		push_a(a, sub_stack, sorting_instructions);
 }
@@ -112,8 +109,7 @@ t_list_i	*sort_stack(t_list_i **a, t_order order)
 	}
 	new_stack_1 = get_semi_sorted_stack(a, &new_stack_2, order,
 			&sorting_instructions);
-	if (is_sorted(*a, order) == false)
-		recursive_sort_a(a, get_orders(order), &sorting_instructions);
+	recursive_sort_a(a, get_orders(order), &sorting_instructions);
 	sort_sub_stack(a, &new_stack_2, order, &sorting_instructions);
 	sort_sub_stack(a, &new_stack_1, order, &sorting_instructions);
 	ft_lsti_reverse(&sorting_instructions);
