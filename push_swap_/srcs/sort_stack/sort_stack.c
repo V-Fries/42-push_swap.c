@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/04 19:37:19 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/05 20:22:30 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ t_list_i	*sort_stack(t_list_i **a, t_order order)
 	t_list_i	*new_stack_1;
 	t_list_i	*new_stack_2;
 
+	if (is_sorted(*a, order))
+		return (NULL);
 	*a = convert_value_to_index(*a);
 	if (*a == NULL)
 		error();
-	if (is_sorted(*a, order))
-		return (NULL);
 	sorting_instructions = NULL;
 	if (ft_lsti_size(*a) <= 2)
 	{
