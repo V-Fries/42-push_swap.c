@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 23:25:12 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/05 21:58:24 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/05 22:33:05 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ typedef struct s_three_for_two
 void		set_three_for_two_targets(t_three_for_two *data, int target_1,
 				int target_2, int target_3);
 void		set_three_for_two_new(t_three_for_two *data, int new_1, int new_2);
-void		change_three_for_two(t_list_i *instructions, t_three_for_two data);
+void		change_three_for_two(t_list_i *instructions, t_three_for_two data,
+				bool *changed_something);
 // get_next_target.c
 t_list_i	*get_next_target(t_list_i *instructions, int target);
 
@@ -39,13 +40,13 @@ t_list_i	*get_next_target(t_list_i *instructions, int target);
 void		add_instruction(t_list_i **optimized_instructions, int instruction);
 // push.c
 void		handle_push(t_list_i **instructions,
-				t_list_i **optimized_instructions);
+				t_list_i **optimized_instructions, bool *changed_something);
 // rotate.c
 void		handle_rotate(t_list_i **instructions,
-				t_list_i **optimized_instructions);
+				t_list_i **optimized_instructions, bool *changed_something);
 // swap.c
 void		handle_swap(t_list_i **instructions,
-				t_list_i **optimized_instructions);
+				t_list_i **optimized_instructions, bool *changed_something);
 
 
 // optimize_sorting_instructions.c

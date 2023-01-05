@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 21:51:48 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/05 21:57:14 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/05 22:13:47 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	replace_three_for_two(t_list_i *instructions, t_three_for_two data)
 	instructions->next->next = tmp;
 }
 
-void	change_three_for_two(t_list_i *instructions, t_three_for_two data)
+void	change_three_for_two(t_list_i *instructions, t_three_for_two data,
+			bool *changed_something)
 {
 	instructions = get_next_target(instructions, data.target_1);
 	while (instructions != NULL && instructions->next != NULL
@@ -47,7 +48,10 @@ void	change_three_for_two(t_list_i *instructions, t_three_for_two data)
 	{
 		if (instructions->next->content == data.target_2
 			&& instructions->next->next->content == data.target_3)
+		{
 			replace_three_for_two(instructions, data);
+			*changed_something = true;
+		}
 		instructions = get_next_target(instructions->next, data.target_1);
 	}
 }
