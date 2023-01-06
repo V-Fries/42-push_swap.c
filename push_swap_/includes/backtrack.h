@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 04:06:34 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/06 09:33:59 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 12:05:56 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void		backtracking(t_backtrack *backtrack);
 
 // get_backtracked_instructions.c
 void		get_backtracked_instructions(t_list_i *a, t_list_i **instructions,
-				bool *changed_something);
+				bool *changed_something, int nb_to_backtrack);
 
 // instructions.c
 void		apply_instruction(t_list_i **stack_a, t_list_i **stack_b,

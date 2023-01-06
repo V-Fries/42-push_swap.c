@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:05:28 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/06 09:39:58 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 17:48:07 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static t_list_i	*remove_useless_instructions(t_list_i *instructions,
 	return (optimized_instructions);
 }
 
-t_list_i	*optimize_sorting_instructions(t_list_i *a, t_list_i *instructions,
-				int stack_size)
+static t_list_i	*initial_instructions_optimization(t_list_i *instructions)
 {
 	bool	changed_something;
 
@@ -52,8 +51,63 @@ t_list_i	*optimize_sorting_instructions(t_list_i *a, t_list_i *instructions,
 		}
 		instructions = remove_useless_instructions(instructions,
 				&changed_something);
-		if (stack_size < 101)
-			get_backtracked_instructions(a, &instructions, &changed_something);
 	}
 	return (instructions);
+}
+
+static bool	get_optimize_sorting_loop_condition(int stack_size,
+				int instructions_size)
+{
+	if (stack_size <= 3)
+		return (instructions_size > 2);
+	if (stack_size <= 5)
+		return (instructions_size > 12);
+	if (stack_size <= 100)
+		return (instructions_size > 699);
+	if (stack_size <= 500)
+		return (instructions_size > 5499);
+	return (false);
+}
+
+static t_list_i	*optimize_sorting_instructions_loop(t_list_i *a,
+				t_list_i *instructions, int stack_size, int nb_to_backtrack)
+{
+	bool	changed_something;
+	int		instructions_size;
+
+	instructions_size = ft_lsti_size(instructions);
+	changed_something = true;
+	while (get_optimize_sorting_loop_condition(stack_size, instructions_size))
+	{
+		if (changed_something == false)
+			nb_to_backtrack++;
+		if (nb_to_backtrack > instructions_size)
+			nb_to_backtrack = instructions_size;
+		while (changed_something)
+		{
+			changed_something = false;
+			get_better_instructions(instructions, &changed_something);
+		}
+		get_backtracked_instructions(a, &instructions, &changed_something,
+			nb_to_backtrack);
+		instructions = remove_useless_instructions(instructions,
+				&changed_something);
+		instructions_size = ft_lsti_size(instructions);
+	}
+	return (instructions);
+}
+
+t_list_i	*optimize_sorting_instructions(t_list_i *a, t_list_i *instructions,
+				int stack_size)
+{
+	int		nb_to_backtrack;
+
+	instructions = initial_instructions_optimization(instructions);
+	nb_to_backtrack = 3;
+	if (stack_size <= 10)
+		nb_to_backtrack = 5;
+	if (stack_size <= 5)
+		nb_to_backtrack = 8;
+	return (optimize_sorting_instructions_loop(a, instructions, stack_size,
+			nb_to_backtrack));
 }
