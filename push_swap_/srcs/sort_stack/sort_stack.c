@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:22:42 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/05 20:22:30 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 00:37:09 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	recursive_sort(t_list_i **stack, t_orders orders,
 	t_list_i	*new_stack;
 
 	size = ft_lsti_size(*stack);
-	if (is_sorted(*stack, orders.current))
+	if (check_sorted(stack, orders, sorting_instructions))
 		return ;
 	if (size <= 2)
 		return (sort_last_elems(stack, orders, size, sorting_instructions));
@@ -65,7 +65,7 @@ static void	recursive_sort_a(t_list_i **stack, t_orders orders,
 	int			size;
 	t_list_i	*new_stack;
 
-	if (is_sorted(*stack, orders.current))
+	if (check_sorted(stack, orders, sorting_instructions))
 		return ;
 	size = ft_lsti_size(*stack);
 	if (size <= 2)
@@ -77,7 +77,7 @@ static void	recursive_sort_a(t_list_i **stack, t_orders orders,
 	push_all_in_a(stack, new_stack, sorting_instructions);
 }
 
-void	sort_sub_stack(t_list_i **a, t_list_i **sub_stack, t_order order,
+static void	sort_sub_stack(t_list_i **a, t_list_i **sub_stack, t_order order,
 			t_list_i **sorting_instructions)
 {
 	t_orders	orders;
@@ -95,12 +95,12 @@ t_list_i	*sort_stack(t_list_i **a, t_order order)
 	t_list_i	*new_stack_1;
 	t_list_i	*new_stack_2;
 
-	if (is_sorted(*a, order))
-		return (NULL);
 	*a = convert_value_to_index(*a);
 	if (*a == NULL)
 		error();
 	sorting_instructions = NULL;
+	if (check_sorted(a, get_orders(order), &sorting_instructions))
+		return (sorting_instructions);
 	if (ft_lsti_size(*a) <= 2)
 	{
 		sort_last_elems(a, get_orders(order), ft_lsti_size(*a),

@@ -6,11 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 23:31:15 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/05 22:12:51 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 00:40:44 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_lib.h"
+#include "sort.h"
 #include "optimize_sorting_instructions.h"
 
 static void	add_pushes(t_list_i **optimized_instructions, int pushes)

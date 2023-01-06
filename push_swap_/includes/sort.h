@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 11:10:54 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/04 18:41:03 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 00:40:12 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@
 # include "ft_linked_list.h"
 # include "push_swap_lib.h"
 # include <stdbool.h>
+
+// add_instruction.c
+void		add_instruction(t_list_i **optimized_instructions, int instruction);
+
+// check_sorted.c
+bool		check_sorted(t_list_i **stack, t_orders orders,
+				t_list_i **sorting_instructions);
 
 // convert_value_to_index.c
 t_list_i	*convert_value_to_index(t_list_i *stack);

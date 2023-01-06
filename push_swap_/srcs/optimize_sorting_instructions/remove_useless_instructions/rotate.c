@@ -6,13 +6,14 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 22:55:47 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/05 22:52:01 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 00:40:52 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_lib.h"
-#include "ft_mem.h"
 #include "optimize_sorting_instructions.h"
+#include "sort.h"
+#include "ft_mem.h"
 
 typedef struct s_rotates
 {

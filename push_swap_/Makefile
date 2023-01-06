@@ -19,17 +19,21 @@ INCLUDES =\
 SRCS_DIR = srcs/
 
 SRCS =\
+			optimize_sorting_instructions/get_better_instructions/change_four_for_three.c	\
+			optimize_sorting_instructions/get_better_instructions/change_three_for_three.c	\
 			optimize_sorting_instructions/get_better_instructions/change_three_for_two.c	\
+			optimize_sorting_instructions/get_better_instructions/get_better_instructions.c	\
 			optimize_sorting_instructions/get_better_instructions/get_next_target.c			\
 \
-			optimize_sorting_instructions/remove_useless_instructions/add_instruction.c	\
-			optimize_sorting_instructions/remove_useless_instructions/push.c			\
-			optimize_sorting_instructions/remove_useless_instructions/rotate.c			\
-			optimize_sorting_instructions/remove_useless_instructions/swap.c			\
+			optimize_sorting_instructions/remove_useless_instructions/push.c	\
+			optimize_sorting_instructions/remove_useless_instructions/rotate.c	\
+			optimize_sorting_instructions/remove_useless_instructions/swap.c	\
 \
 			optimize_sorting_instructions/optimize_sorting_instructions.c	\
 \
 \
+			sort_stack/add_instruction.c		\
+			sort_stack/check_sorted.c			\
 			sort_stack/convert_value_to_index.c	\
 			sort_stack/divide_stack.c			\
 			sort_stack/operate_on_stack.c		\

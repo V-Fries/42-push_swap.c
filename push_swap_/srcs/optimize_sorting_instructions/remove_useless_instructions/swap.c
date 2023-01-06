@@ -6,11 +6,12 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 22:48:18 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/05 22:37:23 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 00:41:01 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_lib.h"
+#include "sort.h"
 #include "optimize_sorting_instructions.h"
 
 static void	add_swaps(int swap_a, int swap_b, t_list_i **optimized_instructions,
