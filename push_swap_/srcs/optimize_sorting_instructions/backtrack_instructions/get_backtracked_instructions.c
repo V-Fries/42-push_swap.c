@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 03:55:53 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/06 09:10:46 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 09:55:24 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,47 +33,6 @@ static t_list_i	*get_next_instructions(t_list_i **instructions)
 	return (ft_lsti_reverse(&next_instructions));
 }
 
-// TODO test with original and best reversed
-static bool	backtrack_failed(t_list_i *a, t_list_i *b, t_list_i *original,
-				t_list_i *best)
-{
-	t_list_i	*a_copy_1;
-	t_list_i	*b_copy_1;
-	t_list_i	*a_copy_2;
-	t_list_i	*b_copy_2;
-	bool		ret;
-
-	a_copy_1 = ft_lsti_cpy(a);
-	b_copy_1 = ft_lsti_cpy(b);
-	if ((a_copy_1 == NULL && a != NULL )
-		|| (b_copy_1 == NULL && b != NULL))
-		error();
-	apply_instructions_on_stacks(&a_copy_1, &b_copy_1, original);
-	a_copy_2 = ft_lsti_cpy(a);
-	b_copy_2 = ft_lsti_cpy(b);
-	if ((a_copy_2 == NULL && a != NULL )
-		|| (b_copy_2 == NULL && b != NULL))
-		error();
-	apply_instructions_on_stacks(&a_copy_2, &b_copy_2, best);
-	ret = (ft_lsti_cmp(a_copy_1, a_copy_2) != 0
-			|| ft_lsti_cmp(b_copy_1, b_copy_2) != 0);
-	ft_lsti_clear(&a_copy_1);
-	ft_lsti_clear(&a_copy_2);
-	ft_lsti_clear(&b_copy_1);
-	ft_lsti_clear(&b_copy_2);
-	return (ret);
-}
-
-static void	fix_backtrack_fail(t_list_i **good, t_list_i **bad)
-{
-	t_list_i	*tmp;
-
-	tmp = *good;
-	*good = *bad;
-	*bad = tmp;
-}
-
-// TODO Fix backtracking() so that backtrack_failed() never returns true
 static t_list_i	*backtrack_instructions(t_list_i *a, t_list_i *b,
 					t_list_i *instructions, bool *changed_something)
 {
@@ -86,10 +45,8 @@ static t_list_i	*backtrack_instructions(t_list_i *a, t_list_i *b,
 	backtracking(&backtrack);
 	if (ft_lsti_cmp(backtrack.best, starting_instruction) != 0)
 	{
-		if (backtrack_failed(a, b, starting_instruction, backtrack.best))
-			fix_backtrack_fail(&starting_instruction, &backtrack.best);
-		else
-			*changed_something = true;
+		ft_lsti_reverse(&backtrack.best);
+		*changed_something = true;
 	}
 	ft_lsti_clear(&starting_instruction);
 	ft_lsti_reverse(&backtrack.best);
