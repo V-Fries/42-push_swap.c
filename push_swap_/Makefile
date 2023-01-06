@@ -4,6 +4,7 @@ NAME_DEBUG =	push_swap_debug
 
 
 H_FILES =\
+			backtrack.h						\
 			optimize_sorting_instructions.h	\
 			sort.h
 
@@ -19,6 +20,11 @@ INCLUDES =\
 SRCS_DIR = srcs/
 
 SRCS =\
+			optimize_sorting_instructions/backtrack_instructions/backtracking.c					\
+			optimize_sorting_instructions/backtrack_instructions/get_backtracked_instructions.c	\
+			optimize_sorting_instructions/backtrack_instructions/instructions.c					\
+			optimize_sorting_instructions/backtrack_instructions/t_backtrack.c					\
+\
 			optimize_sorting_instructions/get_better_instructions/change_four_for_three.c	\
 			optimize_sorting_instructions/get_better_instructions/change_three_for_three.c	\
 			optimize_sorting_instructions/get_better_instructions/change_three_for_two.c	\
@@ -48,8 +54,9 @@ SRCS =\
 TEST_DIR = test/
 
 SRCS_TEST =\
-				includes/sort.h.c	\
-				includes/optimize_sorting_instructions.h.c
+				includes/backtrack.h.c						\
+				includes/optimize_sorting_instructions.h.c	\
+				includes/sort.h.c
 
 
 DIR_OBJS = 		build/

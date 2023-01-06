@@ -6,12 +6,13 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:05:28 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/06 01:11:15 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 09:39:58 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap_lib.h"
 #include "optimize_sorting_instructions.h"
+#include "backtrack.h"
 
 static t_list_i	*remove_useless_instructions(t_list_i *instructions,
 					bool *changed_something)
@@ -36,7 +37,8 @@ static t_list_i	*remove_useless_instructions(t_list_i *instructions,
 	return (optimized_instructions);
 }
 
-t_list_i	*optimize_sorting_instructions(t_list_i *instructions)
+t_list_i	*optimize_sorting_instructions(t_list_i *a, t_list_i *instructions,
+				int stack_size)
 {
 	bool	changed_something;
 
@@ -50,6 +52,8 @@ t_list_i	*optimize_sorting_instructions(t_list_i *instructions)
 		}
 		instructions = remove_useless_instructions(instructions,
 				&changed_something);
+		if (stack_size < 101)
+			get_backtracked_instructions(a, &instructions, &changed_something);
 	}
 	return (instructions);
 }

@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 23:25:12 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/06 01:13:36 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 03:59:36 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void				handle_swap(t_list_i **instructions,
 						bool *changed_something);
 
 // optimize_sorting_instructions.c
-t_list_i			*optimize_sorting_instructions(
-						t_list_i *sorting_instructions);
+t_list_i			*optimize_sorting_instructions(t_list_i *a,
+						t_list_i *instructions, int stack_size);
 
 #endif

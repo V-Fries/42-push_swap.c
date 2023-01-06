@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 19:27:00 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/01 23:46:59 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/06 04:01:26 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	print_instructions(t_list_i *sorting_instructions)
 int	main(int argc, char **argv)
 {
 	t_list_i	*a;
+	t_list_i	*a_copy;
 	t_list_i	*sorting_instructions;
 
 	if (argc == 1)
@@ -68,10 +69,15 @@ int	main(int argc, char **argv)
 	a = parse_arguments(argv + 1, argc - 1);
 	if (a == NULL)
 		error();
+	a_copy = ft_lsti_cpy(a);
+	if (a_copy == NULL)
+		error();
 	sorting_instructions = sort_stack(&a, SORT_ORDER);
-	sorting_instructions = optimize_sorting_instructions(sorting_instructions);
+	sorting_instructions = optimize_sorting_instructions(a_copy,
+			sorting_instructions, ft_lsti_size(a_copy));
 	print_instructions(sorting_instructions);
 	ft_lsti_clear(&a);
+	ft_lsti_clear(&a_copy);
 	ft_lsti_clear(&sorting_instructions);
 	return (0);
 }
