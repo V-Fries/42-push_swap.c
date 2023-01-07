@@ -6,17 +6,16 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:00:33 by vfries            #+#    #+#             */
-/*   Updated: 2022/12/31 15:14:29 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/07 15:58:53 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_linked_list.h"
-#include "ft_char.h"
-#include "ft_numbers.h"
-#include "ft_string.h"
 #include "push_swap_lib.h"
+#include "parsing.h"
+#include "ft_string.h"
+#include "ft_numbers.h"
 #include <stdlib.h>
-#include <stdbool.h>
+#include <limits.h>
 
 static char	*join_all_args(char **args, int size)
 {
@@ -34,47 +33,26 @@ static char	*join_all_args(char **args, int size)
 	return (ret);
 }
 
-static t_list_i	*check_no_doubles(t_list_i *stack)
-{
-	t_list_i	*cursor;
-	t_list_i	*cursor_2;
-
-	cursor = stack;
-	while (cursor != NULL)
-	{
-		cursor_2 = cursor->next;
-		while (cursor_2 != NULL)
-		{
-			if (cursor_2->content == cursor->content)
-			{
-				ft_lsti_clear(&stack);
-				return (NULL);
-			}
-			cursor_2 = cursor_2->next;
-		}
-		cursor = cursor->next;
-	}
-	return (stack);
-}
-
 static t_list_i	*atoll_all_strings_to_list(char **splited)
 {
 	t_list_i	*ret;
 	t_list_i	*new_node;
 	size_t		i;
+	long long	tmp;
 
 	ret = NULL;
 	i = -1;
 	while (splited[++i] != NULL)
 	{
-		new_node = ft_lsti_new(ft_atoll(splited[i]));
-		if (new_node == NULL)
+		tmp = ft_atoll(splited[i]);
+		new_node = ft_lsti_new((int)tmp);
+		ft_lsti_add_front(&ret, new_node);
+		if (new_node == NULL || tmp > INT_MAX || tmp < INT_MIN)
 		{
 			ft_lsti_clear(&ret);
 			ft_free_split(splited);
 			return (NULL);
 		}
-		ft_lsti_add_front(&ret, new_node);
 	}
 	ft_free_split(splited);
 	ft_lsti_reverse(&ret);
@@ -86,10 +64,12 @@ t_list_i	*parse_arguments(char **args, int size)
 	char	*joined_args;
 	char	**splited;
 
+	if (check_args(args, size))
+		error();
 	joined_args = join_all_args(args, size);
 	splited = ft_split(joined_args, ' ');
 	free(joined_args);
-	if (splited == NULL)
+	if (splited == NULL || check_splited(&splited))
 		error();
 	return (atoll_all_strings_to_list(splited));
 }

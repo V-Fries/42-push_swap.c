@@ -3,15 +3,20 @@ NAME =			lib_push_swap.a
 NAME_DEBUG =	lib_push_swap_debug.a
 
 
-H_FILES =\
+H_FILES_INCLUDES =\
 			push_swap_lib.h
 
+H_FILES_INTERNAL =\
+			parsing.h
+
 HEADERS =\
-			${addprefix includes/, ${H_FILES}}
+			${addprefix includes/, ${H_FILES_INCLUDES}}	\
+			${addprefix srcs/internal_headers/, ${H_FILES_INTERNAL}}
 
 INCLUDES =\
 			-I ${LIBFT_PATH}includes/	\
-			-I includes
+			-I includes					\
+			-I srcs/internal_headers/
 
 
 SRCS_DIR = srcs/
@@ -22,15 +27,18 @@ SRCS =\
 				operations/rotate.c			\
 				operations/swap.c			\
 \
+				parsing/parsing_error_check.c	\
+				parsing/parsing.c				\
+\
 				error.c		\
-				is_sorted.c	\
-				parsing.c
+				is_sorted.c
 
 
 TEST_DIR = test/
 
 SRCS_TEST =\
-				includes/push_swap_lib.h.c
+				includes/push_swap_lib.h.c			\
+				srcs/internal_headers/parsing.h.c
 
 
 DIR_OBJS = 		build/
