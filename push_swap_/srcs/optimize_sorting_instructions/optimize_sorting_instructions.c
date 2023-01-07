@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:05:28 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/06 17:48:07 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/07 16:16:38 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static bool	get_optimize_sorting_loop_condition(int stack_size,
 	if (stack_size <= 3)
 		return (instructions_size > 2);
 	if (stack_size <= 5)
-		return (instructions_size > 12);
+		return (instructions_size > 8);
 	if (stack_size <= 100)
 		return (instructions_size > 699);
 	if (stack_size <= 500)
