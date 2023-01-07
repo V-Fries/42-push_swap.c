@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 15:57:47 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/02 07:08:33 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/07 15:25:33 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,7 @@ int	main(int argc, char **argv)
 	int			instruction_count;
 
 	if (argc < 2)
-	{
-		ft_putstr("No arguments were given.\n");
 		return (0);
-	}
 	a = parse_arguments(argv + 1, argc - 1);
 	if (a == NULL)
 		error();

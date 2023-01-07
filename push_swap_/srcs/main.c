@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 19:27:00 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/06 04:01:26 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/07 15:00:05 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ int	main(int argc, char **argv)
 	t_list_i	*sorting_instructions;
 
 	if (argc == 1)
-	{
-		ft_putstr("No arguments were given.\n");
 		return (0);
-	}
 	a = parse_arguments(argv + 1, argc - 1);
 	if (a == NULL)
 		error();
