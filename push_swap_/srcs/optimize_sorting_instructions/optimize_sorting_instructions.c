@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/31 17:05:28 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/07 16:21:26 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/07 20:25:21 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,25 @@ static t_list_i	*initial_instructions_optimization(t_list_i *instructions)
 	return (instructions);
 }
 
-static bool	get_optimize_sorting_loop_condition(int stack_size,
-				int instructions_size)
+static bool	init_optimize_sorting_loop_condition(int stack_size,
+				t_list_i *instructions, int *nb_to_backtrack,
+				bool *changed_something)
 {
+	static int	nb_to_backtrack_original;
+	int			instructions_size;
+
+	if (nb_to_backtrack_original == 0)
+		nb_to_backtrack_original = *nb_to_backtrack;
+	instructions_size = ft_lsti_size(instructions);
+	if (*changed_something == false)
+			(*nb_to_backtrack)++;
+	if (*nb_to_backtrack > instructions_size)
+	{
+		nb_to_backtrack_original -= *nb_to_backtrack - instructions_size;
+		*nb_to_backtrack = instructions_size;
+	}
+	if (nb_to_backtrack_original == *nb_to_backtrack + 3)
+		return (false);
 	if (stack_size <= 3)
 		return (instructions_size > 2);
 	if (stack_size <= 4)
@@ -66,8 +82,6 @@ static bool	get_optimize_sorting_loop_condition(int stack_size,
 		return (instructions_size > 8);
 	if (stack_size <= 100)
 		return (instructions_size > 699);
-	if (stack_size <= 500)
-		return (instructions_size > 5499);
 	return (false);
 }
 
@@ -75,16 +89,11 @@ static t_list_i	*optimize_sorting_instructions_loop(t_list_i *a,
 				t_list_i *instructions, int stack_size, int nb_to_backtrack)
 {
 	bool	changed_something;
-	int		instructions_size;
 
-	instructions_size = ft_lsti_size(instructions);
 	changed_something = true;
-	while (get_optimize_sorting_loop_condition(stack_size, instructions_size))
+	while (init_optimize_sorting_loop_condition(stack_size, instructions,
+			&nb_to_backtrack, &changed_something))
 	{
-		if (changed_something == false)
-			nb_to_backtrack++;
-		if (nb_to_backtrack > instructions_size)
-			nb_to_backtrack = instructions_size;
 		while (changed_something)
 		{
 			changed_something = false;
@@ -94,7 +103,6 @@ static t_list_i	*optimize_sorting_instructions_loop(t_list_i *a,
 			nb_to_backtrack);
 		instructions = remove_useless_instructions(instructions,
 				&changed_something);
-		instructions_size = ft_lsti_size(instructions);
 	}
 	return (instructions);
 }
