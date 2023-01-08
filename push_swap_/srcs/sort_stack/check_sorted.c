@@ -6,7 +6,7 @@
 /*   By: vfries <vfries@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/05 23:54:34 by vfries            #+#    #+#             */
-/*   Updated: 2023/01/06 01:17:27 by vfries           ###   ########lyon.fr   */
+/*   Updated: 2023/01/08 12:08:25 by vfries           ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 static bool	swap_to_order(t_list_i **stack, t_orders orders,
 				t_list_i **sorting_instructions)
 {
-	if (*stack == NULL || (*stack)->next == NULL)
-		return (true);
 	swap_a(stack, NULL);
 	if (is_sorted(*stack, orders.current))
 	{
