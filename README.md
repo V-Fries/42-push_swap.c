@@ -36,4 +36,4 @@ For example:
 The program operates with two stacks, A and B.  
 Initially, stack A contains the integers given as arguments, which need to be sorted in ascending order.  
 Stack B is empty initially.  
-The operations used to sort stack A must be printed on the standard output
+The operations used to sort stack A must be printed on the standard output.
